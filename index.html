@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend Mentor | Weather App</title>
+    <link rel="icon" type="image/x-icon" href="./assets/images/favicon-32x32.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="./assets/images/logo.svg" class="logo-icon" alt="Logo">
+                    <span></span>
+                </div>
+                <div class="units-dropdown">
+                    <button class="units-btn" id="unitsBtn">
+                        <!-- <svg class="settings-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> -->
+                        <img src="./assets/images/icon-units.svg">
+                        </svg>
+                        Units
+                        <img src="./assets/images/icon-dropdown.svg" class="settings-icon" alt="Settings">
+                    </button>
+                    <div class="units-menu" id="unitsMenu">
+                        <div class="units-header">Switch to <span id="unitSystemLabel">Imperial</span></div>
+
+                        <div class="units-section">
+                            <div class="units-section-title">Temperature</div>
+                            <button class="unit-option" data-unit="temp" data-value="celsius">
+                                Celsius (°C)
+                                <img src="./assets/images/icon-checkmark.svg" class="check-icon" alt="selected">
+                            </button>
+                            <button class="unit-option" data-unit="temp" data-value="fahrenheit">
+                                Fahrenheit (°F)
+                                <img src="./assets/images/icon-checkmark.svg" class="check-icon" alt="selected">
+                            </button>
+                        </div>
+
+                        <div class="units-section">
+                            <div class="units-section-title">Wind Speed</div>
+                            <button class="unit-option" data-unit="wind" data-value="kmh">
+                                km/h
+                                <svg class="check-icon" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" />
+                                </svg>
+                            </button>
+                            <button class="unit-option" data-unit="wind" data-value="mph">
+                                mph
+                                <svg class="check-icon" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" />
+                                </svg>
+                            </button>
+                        </div>
+
+                        <div class="units-section">
+                            <div class="units-section-title">Precipitation</div>
+                            <button class="unit-option" data-unit="precip" data-value="mm">
+                                Millimeters (mm)
+                                <svg class="check-icon" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                                </svg>
+                            </button>
+                            <button class="unit-option" data-unit="precip" data-value="in">
+                                Inches (in)
+                                <svg class="check-icon" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" />
+                                </svg>
+                            </button>
+                        </div>
+
+                        <div class="units-section days-section">
+                            <button class="day-option">Monday</button>
+                            <button class="day-option">Tuesday</button>
+                            <button class="day-option">Wednesday</button>
+                            <button class="day-option">Thursday</button>
+                            <button class="day-option">Friday</button>
+                            <button class="day-option">Saturday</button>
+                            <button class="day-option">Sunday</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero">
+                <h1 class="hero-title">How's the sky looking today?</h1>
+
+                <!-- Search Section -->
+                <div class="search-section">
+                    <div class="search-container">
+                        <img src="./assets/images/icon-search.svg" class="search-icon" alt="Search">
+                        <input type="text" class="search-input" id="searchInput" placeholder="Search for a place..."
+                            autocomplete="off">
+                        <div class="search-dropdown" id="searchDropdown"></div>
+                        <div class="search-status" id="searchStatus"></div>
+                    </div>
+                    <button class="search-btn" id="searchBtn">Search</button>
+                </div>
+            </section>
+
+            <!-- Weather Content -->
+            <div class="weather-content" id="weatherContent">
+                <!-- Loading State -->
+                <div class="loading-state" id="loadingState">
+                    <div class="loading-content">
+                        <div class="loading-spinner">
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
+                        <p>Loading...</p>
+                    </div>
+
+                    <!-- Skeleton Loaders -->
+                    <div class="weather-grid">
+                        <!-- Left Column Skeletons -->
+                        <div class="weather-left">
+                            <!-- Main Card Skeleton -->
+                            <div class="skeleton skeleton-card skeleton-card-main"></div>
+
+                            <!-- Metrics Grid Skeletons -->
+                            <div class="metrics-grid">
+                                <div class="skeleton skeleton-metric"></div>
+                                <div class="skeleton skeleton-metric"></div>
+                                <div class="skeleton skeleton-metric"></div>
+                                <div class="skeleton skeleton-metric"></div>
+                            </div>
+
+                            <!-- Daily Forecast Skeletons -->
+                            <div class="daily-forecast-section">
+                                <h3 style="margin-bottom: 16px; font-size: 18px;">Daily forecast</h3>
+                                <div class="daily-forecast-grid">
+                                    <div class="skeleton skeleton-day"></div>
+                                    <div class="skeleton skeleton-day"></div>
+                                    <div class="skeleton skeleton-day"></div>
+                                    <div class="skeleton skeleton-day"></div>
+                                    <div class="skeleton skeleton-day"></div>
+                                    <div class="skeleton skeleton-day"></div>
+                                    <div class="skeleton skeleton-day"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column Skeletons -->
+                        <div class="weather-right">
+                            <div class="hourly-forecast-container">
+                                <div class="skeleton skeleton-hourly-header"></div>
+                                <div class="skeleton skeleton-hourly-item"></div>
+                                <div class="skeleton skeleton-hourly-item"></div>
+                                <div class="skeleton skeleton-hourly-item"></div>
+                                <div class="skeleton skeleton-hourly-item"></div>
+                                <div class="skeleton skeleton-hourly-item"></div>
+                                <div class="skeleton skeleton-hourly-item"></div>
+                                <div class="skeleton skeleton-hourly-item"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- No Results State -->
+                <div class="no-results" id="noResults">
+                    <h2>No search result found!</h2>
+                </div>
+
+                <!-- API Error State -->
+                <div class="error-state" id="errorState">
+                    <div class="error-icon">⊘</div>
+                    <h2>Something went wrong</h2>
+                    <p>We couldn't connect to the server (API error). Please try again in a few moments.</p>
+                    <button class="retry-btn" id="retryBtn">↻ Retry</button>
+                </div>
+
+                <!-- Weather Display -->
+                <div class="weather-display" id="weatherDisplay">
+                    <div class="weather-grid">
+                        <!-- Left Column -->
+                        <div class="weather-left">
+                            <!-- Main Weather Card -->
+                            <div class="weather-card-main" id="mainWeatherCard">
+                                <div class="weather-decoration">
+                                    <div class="decoration-circle"></div>
+                                    <div class="decoration-star"></div>
+                                    <div class="decoration-star small"></div>
+                                </div>
+                                <div class="weather-location">
+                                    <h2 class="location-name" id="locationName">Berlin, Germany</h2>
+                                    <p class="location-date" id="locationDate">Tuesday, Aug 5, 2025</p>
+                                </div>
+                                <div class="weather-main">
+                                    <div class="weather-icon-large" id="weatherIconLarge"><img src="./assets/images/icon-sunny.webp" alt=""></div>
+                                    <div class="weather-temp-large" id="weatherTempLarge">68°</div>
+                                </div>
+                            </div>
+
+                            <!-- Weather Metrics Grid -->
+                            <div class="metrics-grid">
+                                <div class="metric-card">
+                                    <div class="metric-label">Feels Like</div>
+                                    <div class="metric-value" id="feelsLike">64°</div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="metric-label">Humidity</div>
+                                    <div class="metric-value" id="humidity">46%</div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="metric-label">Wind</div>
+                                    <div class="metric-value" id="wind">9 mph</div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="metric-label">Precipitation</div>
+                                    <div class="metric-value" id="precipitation">0 in</div>
+                                </div>
+                            </div>
+
+                            <!-- Daily Forecast -->
+                            <div class="daily-forecast">
+                                <h3 class="forecast-title">Daily forecast</h3>
+                                <div class="daily-forecast-grid" id="dailyForecast">
+                                    <!-- Generated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column - Hourly Forecast -->
+                        <div class="weather-right">
+                            <div class="hourly-forecast-container">
+                                <div class="hourly-header">
+                                    <h3>Hourly forecast</h3>
+                                    <div class="day-selector">
+                                        <button class="day-selector-btn" id="daySelectorBtn">
+                                            <span id="selectedDay">Tuesday</span>
+                                            <svg class="chevron" viewBox="0 0 24 24" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2"
+                                                    stroke-linecap="round" />
+                                            </svg>
+                                        </button>
+                                        <div class="day-selector-menu" id="daySelectorMenu">
+                                            <!-- Generated by JavaScript -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hourly-forecast-list" id="hourlyForecast">
+                                    <!-- Generated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <script src="scripts.js"></script>
+
+    <footer id="foot">
+        Challenge by <a id="frontt"  href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>
+        Coded by <a id="frontt"  href="#">Abasiakan</a>.
+    </footer>
+</body>    
